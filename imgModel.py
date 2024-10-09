@@ -39,6 +39,8 @@ model.compile(optimizer='adam',
               loss='categorical_crossentropy',  # 다중 분류를 위한 손실 함수
               metrics=['accuracy'])
 
+
+
 # 모델 학습
 history = model.fit(
     train_generator,
@@ -47,5 +49,20 @@ history = model.fit(
     validation_data=validation_generator,
     validation_steps=50)
 
-# 모델 저장
-model.save('image_classifier_model.keras')
+
+model.save("img_model", save_format='tf')
+
+# model = tf.keras.models.load_model('C:/Users/kjk98/OneDrive/바탕 화면/TensorFlowproject/img_model')
+
+# # 그래프에서 각 노드 이름 출력
+# print(model.signatures)# print("입력")
+# for layer in model.layers:
+#     print(layer.name)
+# input_layer_name = model.layers[0].name  # 첫 번째 레이어가 입력 레이어입니다.
+# print("Input layer name:", input_layer_name)
+
+# # 출력 레이어 이름 가져오기
+# output_layer_name = model.layers[-1].name  # 마지막 레이어가 출력 레이어입니다.
+# print("Output layer name:", output_layer_name)
+
+# model.summary()

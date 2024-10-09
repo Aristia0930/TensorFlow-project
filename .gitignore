@@ -1,2 +1,5 @@
 *.h5
 *.keras
+classifier/src/main/resources/application.yml
+img_model/
+pyModel/

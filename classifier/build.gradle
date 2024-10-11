@@ -25,6 +25,18 @@ dependencies {
 
 	//텐서플로우
 	implementation 'org.tensorflow:tensorflow:1.15.0'
+
+	//mysql
+	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
+
+	//MyBatis
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+
+	//기타 의존성
+	//LOMBOK
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
 }
 
 tasks.named('test') {

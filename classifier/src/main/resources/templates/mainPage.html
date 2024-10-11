@@ -3,17 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+
 </head>
 <body>
+
 <h1>메인페이지</h1>
 
 <h1>Upload Image for Classification</h1>
 
-<form id="uploadForm" action="/classify" method="POST" enctype="multipart/form-data">
-    <input type="file" id="fileInput" name="file" accept="image/*" />
-    <button type="submit">Upload</button>
+<div>
+    <img id="img_preview" style="max-width: 300px; max-height: 300px; display:none;">
+</div>
+
+<form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" id="fileInput" name="file" accept="image/*" onchange="UploadButton(event)"/>
+    <button type="button" id="uploadButton" onclick="uploadImage()" disabled>Upload</button>
 </form>
-<h1 th:text="${ans}"></h1>
+
+<hr>
+<div id="result"></div>
+
+<div id="review">
+    <form id="error" action="/edite" method="get">
+        <input type="text" id="textError" value="" onchange="editButton()"/>
+        <button type="submit" id="submitError" disabled>오류 수정하기</button>
+    </form>
+
+</div>
+
+
+
+
+
+<script type="text/javascript" th:src="@{/mainPage.js}"></script>
+<link th:href="@{/mainPage.css}" rel="stylesheet">
+
+
+
 
 </body>
+
 </html>

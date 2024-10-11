@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.classifier.mapper.CategoryMapper">
+    <resultMap id="category" type="org.example.classifier.dto.CategoryDto">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+
+    </resultMap>
+
+
+<!--    &lt;!&ndash;    스케줄목록조회&ndash;&gt;-->
+<!--    <select id="selectSchedule" resultMap="schedule">-->
+<!--        select * from schedules-->
+<!--    </select>-->
+
+<!--    <insert id="register"  parameterType="org.example.study1.scheduled.ScheduleDto">-->
+<!--        INSERT INTO schedules (title,startTime,endTime) VALUES (#{title}, #{startTime}, #{endTime})-->
+<!--    </insert>-->
+
+</mapper>

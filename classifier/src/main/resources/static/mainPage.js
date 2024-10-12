@@ -1,4 +1,7 @@
 document.getElementById("review").style.display = "none";
+if(/*[[${rs}]]*/ ''){
+    alert(/*[[${rs}]]*/ '')
+}
 
 function uploadImage() {
 
@@ -25,6 +28,30 @@ function uploadImage() {
             console.error('Error:', error);
         });
 }
+
+function editImage() {
+
+
+    var formData = new FormData();
+    formData.append("file", document.getElementById("fileInput").files[0]);
+    formData.append("text", document.getElementById("textError").value);
+
+    fetch('/edite', {
+        method: 'POST',
+        body: formData
+    })
+        .then(rs=>{
+            if(rs.redirected){
+                alert("오류수정 전송완료")
+                window.location.href=rs.url;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+
 
 function UploadButton(event){
     const img=event.target.files[0];

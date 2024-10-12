@@ -25,9 +25,9 @@
 <div id="result"></div>
 
 <div id="review">
-    <form id="error" action="/edite" method="get">
+    <form id="error" enctype="multipart/form-data">
         <input type="text" id="textError" value="" onchange="editButton()"/>
-        <button type="submit" id="submitError" disabled>오류 수정하기</button>
+        <button type="button" id="submitError" onclick="editImage()" disabled>오류 수정하기</button>
     </form>
 
 </div>

@@ -1,5 +1,7 @@
 package org.example.classifier.controller;
 
+import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,14 +24,25 @@ import java.util.stream.IntStream;
 @RestController
 public class IndexRestController {
 
-    private final SavedModelBundle model;
+    @Value("${custom.model-path}")
+    private String path;
+
+    private  SavedModelBundle model;
     private final String[] categories = {"cats", "dogs"}; // 클래스 이름
 
     public IndexRestController() {
-        model = SavedModelBundle.load("C:/Users/kjk98/OneDrive/바탕 화면/TensorFlowproject/img_model", "serve");
 
     }
-
+    @PostConstruct
+    public void init() {
+        try {
+            model = SavedModelBundle.load(path, "serve");
+        } catch (Exception e) {
+            e.printStackTrace();
+            // 경로 문제나 모델 로딩 실패 시 로그 또는 에러 처리
+            System.out.println("Failed to load the model from path: " + path);
+        }
+    }
 
     @PostMapping("/classify")
     public String classifyImage(@RequestParam("file") MultipartFile file ) throws IOException {

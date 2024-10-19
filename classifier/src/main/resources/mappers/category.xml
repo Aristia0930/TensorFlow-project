@@ -9,13 +9,17 @@
     </resultMap>
 
 
-<!--    &lt;!&ndash;    스케줄목록조회&ndash;&gt;-->
-<!--    <select id="selectSchedule" resultMap="schedule">-->
-<!--        select * from schedules-->
-<!--    </select>-->
+    <select id="categoryName" resultMap="category">
+        select * from category
+    </select>
 
-<!--    <insert id="register"  parameterType="org.example.study1.scheduled.ScheduleDto">-->
-<!--        INSERT INTO schedules (title,startTime,endTime) VALUES (#{title}, #{startTime}, #{endTime})-->
-<!--    </insert>-->
+    <insert id="addName"  parameterType="org.example.classifier.dto.CategoryDto">
+        INSERT INTO category (name) VALUES (#{name})
+    </insert>
 
+
+
+    <select id="countName" resultType="java.lang.Integer"  parameterType="org.example.classifier.dto.CategoryDto">
+        select count(*) from category where name= #{name}
+    </select>
 </mapper>

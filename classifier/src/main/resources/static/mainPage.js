@@ -2,7 +2,17 @@ document.getElementById("review").style.display = "none";
 if(/*[[${rs}]]*/ ''){
     alert(/*[[${rs}]]*/ '')
 }
+function getParameterByName(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
 
+// rs 값을 URL 파라미터에서 가져옴
+var message = getParameterByName('rs');
+console.log('메시지:', message); // 메시지 로그
+if (message) { // message가 존재할 경우
+    alert(message); // 알림 표시
+}
 function uploadImage() {
 
 

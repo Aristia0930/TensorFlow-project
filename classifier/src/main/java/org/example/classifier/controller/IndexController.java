@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,11 +35,12 @@ public class IndexController {
             boolean fileMake= classifierService.makeFile(file,text);
             if (fileMake) {
                 System.out.println("파일생성성공");
-                rs.addAttribute("rs", "서버에 파일전송 완료");
+                return "redirect:/?rs="+"success";
+
             }
             else{
                 System.out.println("파일생성실패");
-                rs.addAttribute("rs","서버에 파일전송 실패");
+                return "redirect:/?rs="+"false";
             }
         }
         else{
@@ -46,18 +48,17 @@ public class IndexController {
             boolean fileMake= classifierService.makeFile(file,text);
             if (fileMake) {
                 System.out.println("파일생성성공");
-                rs.addAttribute("rs", "서버에 파일전송 완료");
+                return "redirect:/?rs="+"success";
             }
             else{
                 System.out.println("파일생성실패");
-                rs.addAttribute("rs","서버에 파일전송 실패");
+                return "redirect:/?rs="+"false";
             }
         }
 
 
 
 
-        return "redirect:/";
     }
 
 }

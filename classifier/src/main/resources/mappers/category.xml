@@ -22,4 +22,12 @@
     <select id="countName" resultType="java.lang.Integer"  parameterType="org.example.classifier.dto.CategoryDto">
         select count(*) from category where name= #{name}
     </select>
+
+    <update id="editName" parameterType="org.example.classifier.dto.CategoryDto">
+        UPDATE category SET name=#{newName} WHERE name=#{name}
+    </update>
+
+    <delete id="deleteCa" parameterType="org.example.classifier.dto.CategoryDto">
+        DELETE FROM category WHERE name = #{name}
+    </delete>
 </mapper>

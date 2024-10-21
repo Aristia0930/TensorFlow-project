@@ -16,4 +16,10 @@ public interface CategoryMapper {
     //카테고리 이름 중복확인
     int countName(String name);
 
+    //카테고리 이름 변경
+    int  editName(String name,String newName);
+
+    //카테고리 삭제
+    void deleteCa(String name);
+
 }

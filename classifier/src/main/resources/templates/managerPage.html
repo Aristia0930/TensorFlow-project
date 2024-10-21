@@ -15,16 +15,33 @@
 <table>
     <tr>
         <th>이름</th>
-        <th>수정/삭제</th>
+        <th>수정</th>
+        <th>삭제</th>
     </tr>
 
     <tr th:each="category : ${category_list}">
-        <td th:text="${category.name}"></td>
-        <td><button>수정/삭제</button></td>
-
+        <td>
+            <!-- 기존 이름 표시 -->
+            <span th:id="'name-'+${category.id}" th:text="${category.name}"></span>
+            <!-- 이름을 수정할 수 있는 숨겨진 입력 필드 -->
+            <input type="text" th:id="'input-'+${category.id}" th:value="${category.name}" style="display:none;">
+        </td>
+        <td>
+            <!-- 수정 버튼 -->
+            <button type="button" th:id="'edit-btn-'+${category.id}" th:myid="${category.id}" th:onclick="showEditInput(this.getAttribute('myid'))">수정</button>
+            <!-- 저장 버튼 (초기에는 숨김 처리) -->
+            <button type="button" th:id="'save-btn-'+${category.id}" style="display:none;"  th:myid="${category.id}" th:myname="${category.name}"
+                    th:onclick="saveEdit(this.getAttribute('myname'),this.getAttribute('myid'))">저장</button>
+        </td>
+        <td>
+            <!-- 삭제 버튼 -->
+            <button type="button"  th:myname="${category.name}" th:onclick="deleteCategory(this.getAttribute('myname'))">삭제</button>
+        </td>
     </tr>
 
 </table>
+
+
 
 
 

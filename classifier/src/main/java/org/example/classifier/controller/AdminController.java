@@ -1,15 +1,11 @@
 package org.example.classifier.controller;
 
 import org.example.classifier.dto.CategoryDto;
-import org.example.classifier.service.ManagerService;
+import org.example.classifier.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,11 +14,11 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private ManagerService managerService;
+    private AdminService adminService;
 
     @GetMapping("")
     public String manager_page(Model model){
-        List<CategoryDto> categoryNames= managerService.names();
+        List<CategoryDto> categoryNames= adminService.names();
 
         model.addAttribute("category_list",categoryNames);
 
@@ -33,12 +29,38 @@ public class AdminController {
 
     @PostMapping("/add")
     public String addCategory(CategoryDto categoryDto,Model model){
-        int create = managerService.addName(categoryDto.getName());
+        int create = adminService.addName(categoryDto.getName());
         if (create==0){
             return "redirect:/admin?rs="+"false";
         }
 
-        return "redirect:/admin";
+        return "redirect:/admin?rs="+"success";
     }
+
+    @PatchMapping("/edit")
+    public String edit(@RequestParam("name") String name, @RequestParam("newName") String newName) {
+       int rs=adminService.editName(name,newName);
+       if (rs==0){
+           return "redirect:/admin";
+       }
+       else{
+           return "redirect:/admin";
+       }
+
+
+
+
+
+    }
+
+    @DeleteMapping("/delete")
+    public String delete(@RequestParam("name") String name) {
+        adminService.delete(name);
+        return "redirect:/admin";
+
+
+    }
+
+
 
 }

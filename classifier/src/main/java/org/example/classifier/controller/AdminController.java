@@ -1,6 +1,7 @@
 package org.example.classifier.controller;
 
 import org.example.classifier.dto.CategoryDto;
+import org.example.classifier.dto.NewImageDto;
 import org.example.classifier.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,39 +28,18 @@ public class AdminController {
         return "managerPage";
     }
 
-    @PostMapping("/add")
-    public String addCategory(CategoryDto categoryDto,Model model){
-        int create = adminService.addName(categoryDto.getName());
-        if (create==0){
-            return "redirect:/admin?rs="+"false";
-        }
 
-        return "redirect:/admin?rs="+"success";
+
+    //훈력 선별페이지
+    @GetMapping("/train")
+    public String trainPage(Model model){
+       List<NewImageDto> imges= adminService.imageTrain();
+       model.addAttribute("imges",imges);
+
+
+        return "trainPage";
     }
 
-    @PatchMapping("/edit")
-    public String edit(@RequestParam("name") String name, @RequestParam("newName") String newName) {
-       int rs=adminService.editName(name,newName);
-       if (rs==0){
-           return "redirect:/admin";
-       }
-       else{
-           return "redirect:/admin";
-       }
-
-
-
-
-
-    }
-
-    @DeleteMapping("/delete")
-    public String delete(@RequestParam("name") String name) {
-        adminService.delete(name);
-        return "redirect:/admin";
-
-
-    }
 
 
 

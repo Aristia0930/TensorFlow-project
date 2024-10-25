@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>모델 학습 선별 페이지</h1>
+
+<table>
+    <tr>
+        <th>카테고리</th>
+        <th>이미지</th>
+        <th>수락</th>
+        <th>거절</th>
+    </tr>
+
+    <tr th:each="imge : ${imges}">
+        <td>
+            <!-- 기존 이름 표시 -->
+            <span th:id="'name-'+${imge.id}" th:text="${imge.category}"></span>
+        </td>
+
+        <td>
+            <img th:src="'/imges/'+${imge.name}" width="250px" height="250px">
+        </td>
+        <td>
+
+<!--            <button type="button" th:id="'save-btn-'+${category.id}"   th:myid="${category.id}" th:myname="${category.name}"-->
+<!--                    th:onclick="saveEdit(this.getAttribute('myname'),this.getAttribute('myid'))">저장</button>-->
+            <button>수락</button>
+        </td>
+        <td>
+            <!-- 삭제 버튼 -->
+<!--            <button type="button"  th:myname="${category.name}" th:onclick="deleteCategory(this.getAttribute('myname'))">삭제</button>-->
+            <button>거절</button>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

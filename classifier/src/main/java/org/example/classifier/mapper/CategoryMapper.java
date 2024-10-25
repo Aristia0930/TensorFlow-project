@@ -2,6 +2,7 @@ package org.example.classifier.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.example.classifier.dto.CategoryDto;
+import org.example.classifier.dto.NewImageDto;
 
 import java.util.List;
 
@@ -21,5 +22,7 @@ public interface CategoryMapper {
 
     //카테고리 삭제
     void deleteCa(String name);
+
+
 
 }

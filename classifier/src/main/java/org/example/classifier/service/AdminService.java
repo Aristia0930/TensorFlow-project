@@ -2,7 +2,9 @@ package org.example.classifier.service;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.example.classifier.dto.CategoryDto;
+import org.example.classifier.dto.NewImageDto;
 import org.example.classifier.mapper.CategoryMapper;
+import org.example.classifier.mapper.NewImageMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +24,11 @@ public class AdminService {
     private String validationPath;
     private final CategoryMapper categoryMapper;
 
-    public AdminService(CategoryMapper categoryMapper) {
+    private  final NewImageMapper newImageMapper;
+
+    public AdminService(CategoryMapper categoryMapper, NewImageMapper newImageMapper) {
         this.categoryMapper = categoryMapper;
+        this.newImageMapper = newImageMapper;
     }
 
     //카테고리 이름 조회
@@ -135,6 +140,11 @@ public class AdminService {
             return 0; // 삭제 실패
         }
 
+    }
+
+    //학습해야할 이미지 불러오기
+    public List<NewImageDto> imageTrain(){
+        return newImageMapper.imgeTrain();
     }
 
 

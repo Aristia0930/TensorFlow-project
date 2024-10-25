@@ -18,5 +18,9 @@
             INSERT INTO newimg (name,path,category,approval,status) VALUES (#{name}, #{path}, #{category},#{approval}, #{status})
         </insert>
 
+    <select id="imgeTrain" resultMap="category">
+        select * from newimg where status=1
+    </select>
+
 
 </mapper>

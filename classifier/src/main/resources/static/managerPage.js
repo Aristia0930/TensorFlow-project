@@ -26,10 +26,15 @@ function cabuttons() {
     fetch('/admin/add', {
         method: 'POST',
         body: formData
-    })
-        .then(rs=>{
-            if(rs.redirected){
-                window.location.href=rs.url;
+    })  .then(response => response.text())
+        .then(text => {
+            if (text === "success") {
+                alert("카테고리 추가 성공")
+                // Reload the current page
+                window.location.reload();
+            } else {
+                alert("카테고리 추가 실패")
+                console.error('Category creation failed:', text);
             }
         })
 
@@ -59,6 +64,7 @@ function deleteCategory(myname,) {
     })
         .then(response => response.text())
         .then(result => {
+            alert("삭제완료")
             window.location.href = "http://localhost:8080/admin"; // 특정 주소로 리다이렉션
         })
         .catch(error => console.error('Error:', error));
@@ -79,7 +85,15 @@ function saveEdit(myname,myid) {
     })
         .then(response => response.text())
         .then(result => {
-            window.location.reload(); // 페이지 새로고침
+            if (result==="success"){
+                alert("카테고리 이름 수정 완료")
+                window.location.reload(); // 페이지 새로고침
+            }
+            else{
+                alert("카테고리 이름 수정 실패")
+                window.location.reload(); // 페이지 새로고침
+            }
+
         })
         .catch(error => console.error('Error:', error));
 }

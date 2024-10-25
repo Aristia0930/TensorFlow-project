@@ -18,7 +18,13 @@
     <tr th:each="imge : ${imges}">
         <td>
             <!-- 기존 이름 표시 -->
-            <span th:id="'name-'+${imge.id}" th:text="${imge.category}"></span>
+            <div th:id="'name-'+${imge.id}" th:text="'분류 :'+${imge.category}"></div>
+            <label th:for="'select-'+${imge.id}">카테고리 지정:</label>
+            <select th:id="'select-'+${imge.id}" name="category" >
+                <option th:each="category : ${category_list}"
+                        th:value="${category.name}" th:text="${category.name}">
+                </option>
+            </select>
         </td>
 
         <td>
@@ -28,7 +34,13 @@
 
 <!--            <button type="button" th:id="'save-btn-'+${category.id}"   th:myid="${category.id}" th:myname="${category.name}"-->
 <!--                    th:onclick="saveEdit(this.getAttribute('myname'),this.getAttribute('myid'))">저장</button>-->
-            <button>수락</button>
+            <button type="button" th:id="'accept-btn-'+${imge.id}"
+                    th:myid="${imge.id}"
+                    th:mypath="${imge.path}"
+                    th:myname="${imge.name}"
+                    th:onclick="acceptButton(this.getAttribute('myid'),this.getAttribute('mypath'),this.getAttribute('myname'))"
+            >
+                수락</button>
         </td>
         <td>
             <!-- 삭제 버튼 -->
@@ -38,6 +50,7 @@
     </tr>
 
 </table>
+<script type="text/javascript" th:src="@{/trainPage.js}"></script>
 
 </body>
 </html>

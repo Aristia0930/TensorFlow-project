@@ -35,6 +35,8 @@ public class AdminController {
     public String trainPage(Model model){
        List<NewImageDto> imges= adminService.imageTrain();
        model.addAttribute("imges",imges);
+       List<CategoryDto> categoryNames= adminService.names();
+        model.addAttribute("category_list",categoryNames);
 
 
         return "trainPage";

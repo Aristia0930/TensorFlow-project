@@ -9,9 +9,16 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.sound.midi.Patch;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.sql.SQLOutput;
 import java.util.List;
+import java.util.Random;
 
 @Service
 //분류된 이미지를 관리자가 선별하여 모델 업데이트
@@ -105,6 +112,7 @@ public class AdminService {
     }
 
 
+
     }
 
     //삭제
@@ -147,8 +155,54 @@ public class AdminService {
         return newImageMapper.imgeTrain();
     }
 
+    @Transactional
+    public Integer addtrain(NewImageDto newImageDto,String name){
+        Integer imgup=newImageMapper.addTrain(newImageDto.getId());
+        if (imgup>0){
+            System.out.println("이미지 sql에 업데디트 성공");
+            //업데이트 성공 파일 이동해야한다.
+            Random random = new Random();
+            int rs= random.nextInt(2);
+            System.out.println(rs);
+            String path=newImageDto.getPath()+"/"+newImageDto.getName();
+            File srcFile = new File(path);
 
 
+
+
+            if (rs==0){
+                File copyFile = new File(trainPath+"/"+name+"/"+newImageDto.getName());
+                try {
+                    Files.copy(srcFile.toPath(), copyFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                }
+                catch(IOException e){
+                    System.out.println(e.getMessage());
+                    System.out.println("파일처리중 오류 발생");
+                    throw new RuntimeException("파일 처리 오류 발생", e); // 롤백을 위해 RuntimeException으로 던지기
+                }
+
+
+            }
+            else{
+                File copyFile = new File(validationPath+"/"+name+"/"+newImageDto.getName());
+                try {
+                    Files.copy(srcFile.toPath(), copyFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                }
+                catch(IOException e){
+                    System.out.println(e.getMessage());
+                    System.out.println("파일처리중 오류 발생");
+                    throw new RuntimeException("파일 처리 오류 발생", e); // 롤백을 위해 RuntimeException으로 던지기
+                }
+            }
+            //성공
+            return 1;
+        }
+        else{
+            //실패
+            return 0;
+        }
+
+    }
 
 
 

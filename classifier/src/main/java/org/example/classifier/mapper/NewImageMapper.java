@@ -12,4 +12,7 @@ public interface NewImageMapper {
 
     //학습할 이미지 불러오기
     List<NewImageDto> imgeTrain();
+
+
+    Integer addTrain(int id);
 }

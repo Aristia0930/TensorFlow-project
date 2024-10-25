@@ -1,6 +1,7 @@
 package org.example.classifier.controller;
 
 import org.example.classifier.dto.CategoryDto;
+import org.example.classifier.dto.NewImageDto;
 import org.example.classifier.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -46,4 +47,22 @@ public class AdminRestController {
 
 
     }
+
+    //트레인쪽 수락
+    @PatchMapping("/train/add")
+    public String addtrain(NewImageDto newImageDto,@RequestParam("categoryName") String name){
+        int rs=adminService.addtrain(newImageDto,name);
+
+        if (rs==1){
+            return "success";
+        }
+        else{
+            return "false";
+        }
+
+    }
+
+    //트레인쪽 거절
+
+
 }

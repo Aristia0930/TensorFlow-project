@@ -19,8 +19,12 @@
         </insert>
 
     <select id="imgeTrain" resultMap="category">
-        select * from newimg where status=1
+        select * from newimg where approval=0
     </select>
+
+    <update id="addTrain" parameterType="org.example.classifier.dto.NewImageDto">
+        UPDATE newimg SET approval=1 WHERE id=#{id}
+    </update>
 
 
 </mapper>

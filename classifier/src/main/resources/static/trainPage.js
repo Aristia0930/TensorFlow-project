@@ -26,3 +26,29 @@ function acceptButton(id,path,naem) {
         })
         .catch(error => console.error('Error:', error));
 }
+
+function refuseButton(id) {
+
+
+
+    var formData = new FormData();
+    formData.append("id", id);
+
+    fetch('/admin/train/refuse', {
+        method: 'PATCH',
+        body: formData
+    })
+        .then(response => response.text())
+        .then(result => {
+            if (result==="success"){
+                alert("삭제완료")
+                window.location.reload(); // 페이지 새로고침
+            }
+            else{
+                alert("삭제실패")
+                window.location.reload(); // 페이지 새로고침
+            }
+
+        })
+        .catch(error => console.error('Error:', error));
+}

@@ -26,5 +26,9 @@
         UPDATE newimg SET approval=1 WHERE id=#{id}
     </update>
 
+    <update id="retrain" parameterType="org.example.classifier.dto.NewImageDto">
+        UPDATE newimg SET approval=2 WHERE id=#{id}
+    </update>
+
 
 </mapper>

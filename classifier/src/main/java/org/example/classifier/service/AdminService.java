@@ -203,9 +203,13 @@ public class AdminService {
         }
 
     }
+    @Transactional
 
+    public int retrain(int id) {
+        return newImageMapper.retrain(id);
+    }
 
-
-
-
+    public int getClassNum() {
+        return categoryMapper.getClaaNum();
+    }
 }

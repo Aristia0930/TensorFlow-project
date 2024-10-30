@@ -30,4 +30,8 @@
     <delete id="deleteCa" parameterType="org.example.classifier.dto.CategoryDto">
         DELETE FROM category WHERE name = #{name}
     </delete>
+
+    <select id="getClaaNum" resultType="java.lang.Integer"  parameterType="org.example.classifier.dto.CategoryDto">
+        select count(*) from category
+    </select>
 </mapper>

@@ -3,3 +3,4 @@
 classifier/src/main/resources/application.yml
 img_model/
 pyModel/
+imgModel.py

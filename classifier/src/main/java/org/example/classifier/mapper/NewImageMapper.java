@@ -15,4 +15,6 @@ public interface NewImageMapper {
 
 
     Integer addTrain(int id);
+
+    Integer retrain(int id);
 }

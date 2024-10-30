@@ -37,6 +37,9 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
+	// https://mvnrepository.com/artifact/org.zeroturnaround/zt-exec
+	implementation 'org.zeroturnaround:zt-exec:1.12'
+
 }
 
 tasks.named('test') {

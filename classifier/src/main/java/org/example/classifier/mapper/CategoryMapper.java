@@ -24,5 +24,5 @@ public interface CategoryMapper {
     void deleteCa(String name);
 
 
-
+    int getClaaNum();
 }

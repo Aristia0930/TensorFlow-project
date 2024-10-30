@@ -45,7 +45,10 @@
         <td>
             <!-- 삭제 버튼 -->
 <!--            <button type="button"  th:myname="${category.name}" th:onclick="deleteCategory(this.getAttribute('myname'))">삭제</button>-->
-            <button>거절</button>
+            <button type="button" th:id="'refuse-btn-'+${imge.id}"
+                    th:myid="${imge.id}"
+                    th:onclick="refuseButton(this.getAttribute('myid'))"
+            >거절</button>
         </td>
     </tr>
 

@@ -18,13 +18,14 @@
     <tr th:each="imge : ${imges}">
         <td>
             <!-- 기존 이름 표시 -->
-            <div th:id="'name-'+${imge.id}" th:text="'분류 :'+${imge.category}"></div>
+            <div>
+                <h4 th:id="'name-'+${imge.id}" th:text="'분류 :'+${imge.category}"></h4>
             <label th:for="'select-'+${imge.id}">카테고리 지정:</label>
             <select th:id="'select-'+${imge.id}" name="category" >
                 <option th:each="category : ${category_list}"
                         th:value="${category.name}" th:text="${category.name}">
                 </option>
-            </select>
+            </select></div>
         </td>
 
         <td>
@@ -54,6 +55,6 @@
 
 </table>
 <script type="text/javascript" th:src="@{/trainPage.js}"></script>
-
+<link th:href="@{/managerPage.css}" rel="stylesheet">
 </body>
 </html>

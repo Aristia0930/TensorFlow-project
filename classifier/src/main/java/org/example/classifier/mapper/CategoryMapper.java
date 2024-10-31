@@ -10,6 +10,7 @@ import java.util.List;
 public interface CategoryMapper {
     //카테고리 조회
     List<CategoryDto> categoryName();
+    List<String> categoryNames();
 
     //카테고리 이름추가
     void addName(String name);

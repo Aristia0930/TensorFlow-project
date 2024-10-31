@@ -1,6 +1,8 @@
 package org.example.classifier.service;
 
+import org.example.classifier.dto.CategoryDto;
 import org.example.classifier.dto.NewImageDto;
+import org.example.classifier.mapper.CategoryMapper;
 import org.example.classifier.mapper.NewImageMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -17,14 +20,16 @@ import java.util.UUID;
 @Service
 public class ClassifierService {
     private final NewImageMapper newImageMapper;
+    private final CategoryMapper categoryMapper;
 
 
     //파일생성위치
     @Value("${custom.temp-img}")
     private String path;
 
-    public ClassifierService(NewImageMapper newImageMapper) {
+    public ClassifierService(NewImageMapper newImageMapper, CategoryMapper categoryMapper) {
         this.newImageMapper = newImageMapper;
+        this.categoryMapper = categoryMapper;
     }
 
     //임시저장파일생성위치 관리
@@ -61,4 +66,7 @@ public class ClassifierService {
 
     }
 
+    public List<String> categorys() {
+        return categoryMapper.categoryNames();
+    }
 }

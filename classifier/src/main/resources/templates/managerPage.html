@@ -7,10 +7,19 @@
 <body>
 
 <h1>관리자 페이지</h1>
+<div>
+    <h2>모델 학습시키기</h2>
+    <button type="button" onclick="modelTrain()">모델 생성</button>
+</div>
+
+<div>
+    <h2>카테고리 추가 시키기</h2>
 <form id="ca_form" enctype="multipart/form-data">
     <input type="text" id="caInput" name="name">
     <button type="button" id="cabutton" onclick="cabuttons()" >카테고리 추가</button>
 </form>
+</div>
+
 
 <table>
     <tr>
@@ -48,7 +57,7 @@
 <h1 th:text="${rs}"></h1>
 
 <script type="text/javascript" th:src="@{/managerPage.js}"></script>
-
+<link th:href="@{/managerPage.css}" rel="stylesheet">
 </body>
 
 </html>

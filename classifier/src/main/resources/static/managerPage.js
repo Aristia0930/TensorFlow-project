@@ -97,3 +97,21 @@ function saveEdit(myname,myid) {
         })
         .catch(error => console.error('Error:', error));
 }
+
+
+function modelTrain() {
+
+
+    fetch('/admin/pycode', {
+        method: 'GET',
+
+    })
+        .then(response => response.text())
+        .then(result => {
+            if(result==="success") {
+                alert("모델생성 완료")
+                window.location.href = "http://localhost:8080/admin";
+            }// 특정 주소로 리다이렉션
+        })
+        .catch(error => console.error('Error:', error));
+}

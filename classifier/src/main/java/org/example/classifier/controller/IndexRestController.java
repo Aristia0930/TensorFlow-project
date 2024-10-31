@@ -1,6 +1,8 @@
 package org.example.classifier.controller;
 
 import jakarta.annotation.PostConstruct;
+import org.example.classifier.service.ClassifierService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,16 +21,19 @@ import java.nio.FloatBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.IntStream;
 
 @RestController
 public class IndexRestController {
+    @Autowired
+    private ClassifierService classifierService;
 
     @Value("${custom.model-path}")
     private String path;
 
     private  SavedModelBundle model;
-    private final String[] categories = {"cats", "dogs"}; // 클래스 이름
+    private List<String> categories ;
 
     public IndexRestController() {
 
@@ -37,6 +42,7 @@ public class IndexRestController {
     public void init() {
         try {
             model = SavedModelBundle.load(path, "serve");
+            categories = classifierService.categorys();
         } catch (Exception e) {
             e.printStackTrace();
             // 경로 문제나 모델 로딩 실패 시 로그 또는 에러 처리
@@ -66,14 +72,14 @@ public class IndexRestController {
 
 
         // 예측 결과를 배열로 변환
-        float[][] output = new float[1][categories.length];  // 카테고리 수에 맞춘 배열 크기
+        float[][] output = new float[1][categories.size()];  // 카테고리 수에 맞춘 배열 크기
         result.copyTo(output);
 
         // 가장 높은 확률을 가진 클래스 찾기
         int predictedClassIndex = getMaxIndex(output[0]);
         System.out.println("Prediction output: " + Arrays.toString(output[0]));
 
-        return categories[predictedClassIndex];
+        return categories.get(predictedClassIndex);
 
     }
 

@@ -13,6 +13,10 @@
         select * from category
     </select>
 
+    <select id="categoryNames" resultType="java.lang.String">
+        select name from category
+    </select>
+
     <insert id="addName"  parameterType="org.example.classifier.dto.CategoryDto">
         INSERT INTO category (name) VALUES (#{name})
     </insert>
